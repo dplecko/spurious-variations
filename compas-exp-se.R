@@ -1,6 +1,6 @@
 
-
 library(data.table)
+library(faircause)
 
 # load census data
 compas_data <- get(data("compas", package = "faircause"))
@@ -53,7 +53,6 @@ res <- setnames(res, names(res), c("Exp-SE", "Exp-SE_I", "Exp-SE_II", "iter"))
 
 res <- melt(res, id.vars = "iter")
 
-
 ggplot(
   res[, list(mean(value), sd(value)), by = "variable"],
   aes(x = variable, y = V1, fill = variable) 
@@ -75,4 +74,4 @@ ggplot(
     axis.text.x = element_text(angle = 0)
   )
 
-ggsave("~/Desktop/compas-spurious-decomp.png", width = 6, height = 4)                  
+ggsave("compas-spurious-decomp.png", width = 6, height = 4)                  
